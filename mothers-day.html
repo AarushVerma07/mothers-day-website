@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #c2385a;
+    --rose-light: #f7e0e7;
+    --rose-mid: #e8a0b4;
+    --cream: #fdf8f4;
+    --text: #2d1f1f;
+    --text-muted: #7a5c5c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 20px 60px; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, #f7e0e7 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, #fdf3e3 0%, transparent 50%), var(--cream);
+    z-index: 0;
+  }
+  .petal {
+    position: absolute; width: 18px; height: 18px;
+    border-radius: 50% 0 50% 0; opacity: 0.18;
+    animation: floatPetal linear infinite; z-index: 0;
+  }
+  @keyframes floatPetal {
+    0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.18; } 90% { opacity: 0.18; }
+    100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .occasion-tag {
+    display: inline-block; font-size: 13px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--rose); margin-bottom: 20px; font-weight: 700;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 8vw, 80px); line-height: 1.1; color: var(--text);
+    margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--rose); }
+  .hero-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px); color: var(--text-muted); font-weight: 300;
+    line-height: 1.7; max-width: 500px; margin: 0 auto 40px;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-photo-frame {
+    width: min(300px, 70vw); height: min(370px, 85vw);
+    border-radius: 60% 40% 50% 50% / 50% 50% 60% 40%;
+    overflow: hidden; border: 4px solid var(--rose-mid);
+    margin: 0 auto 40px; opacity: 0; animation: fadeUp 0.9s 0.3s forwards; position: relative;
+  }
+  .hero-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-placeholder {
+    width: 100%; height: 100%; background: var(--rose-light);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--rose); gap: 10px;
+  }
+  .photo-placeholder svg { opacity: 0.5; }
+  .photo-placeholder span { font-size: 13px; opacity: 0.7; text-align: center; padding: 0 20px; }
+  .scroll-hint {
+    font-size: 12px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.8s 1.2s forwards, bounce 2s 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  .divider { text-align: center; padding: 30px 0; color: var(--rose); font-size: 22px; letter-spacing: 10px; opacity: 0.5; }
+
+  .section { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--rose); font-weight: 700; margin-bottom: 14px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 44px); line-height: 1.2; margin-bottom: 20px; }
+  .section-body { font-size: 17px; line-height: 1.85; color: var(--text-muted); font-weight: 300; max-width: 580px; }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 50px; }
+  @media (max-width: 600px) { .photo-grid { grid-template-columns: 1fr 1fr; } }
+  .photo-card { border-radius: 16px; overflow: hidden; aspect-ratio: 4/5; border: 2px solid var(--rose-light); position: relative; }
+  .photo-card:nth-child(2) { margin-top: 24px; }
+  .photo-card:nth-child(5) { margin-top: -24px; }
+  .photo-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .photo-card:hover img { transform: scale(1.04); }
+  .photo-card .caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 30px 14px 12px;
+    background: linear-gradient(transparent, rgba(45,31,31,0.65));
+    color: white; font-size: 13px; font-weight: 300;
+  }
+  .photo-card .ph {
+    width: 100%; height: 100%; background: var(--rose-light);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--rose); gap: 8px; font-size: 12px; opacity: 0.7;
+  }
+
+  .quote-block { background: var(--rose-light); border-left: 4px solid var(--rose); border-radius: 0 16px 16px 0; padding: 30px 36px; margin: 60px 0; }
+  .quote-text { font-family: 'Playfair Display', serif; font-size: clamp(20px, 3.5vw, 28px); font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 14px; }
+  .quote-attr { font-size: 13px; color: var(--rose); letter-spacing: 1px; font-weight: 700; }
+
+  .banner-photo { width: 100%; height: clamp(240px, 40vw, 1500px); overflow: hidden; }
+  .banner-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .banner-photo .ph { width: 100%; height: 100%; background: var(--rose-light); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--rose); gap: 10px; font-size: 13px; opacity: 0.7; }
+
+  .memories { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+  .memory-item { display: flex; gap: 20px; align-items: flex-start; }
+  .memory-num { min-width: 42px; height: 42px; border-radius: 50%; background: var(--rose-light); color: var(--rose); font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--rose-mid); }
+  .memory-text strong { display: block; font-size: 16px; color: var(--text); margin-bottom: 4px; }
+  .memory-text span { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+
+  footer { text-align: center; padding: 60px 20px; background: var(--text); color: white; }
+  footer .footer-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 4vw, 36px); font-style: italic; margin-bottom: 14px; color: var(--rose-mid); }
+  footer p { font-size: 14px; opacity: 0.5; letter-spacing: 1px; font-weight: 300; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     HERO SECTION
+═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="petal" style="left:8%;background:#e8a0b4;animation-duration:14s;animation-delay:0s;"></div>
+  <div class="petal" style="left:20%;background:#c2385a;width:12px;height:12px;animation-duration:18s;animation-delay:3s;"></div>
+  <div class="petal" style="left:75%;background:#c9973c;animation-duration:12s;animation-delay:1s;"></div>
+  <div class="petal" style="left:90%;background:#e8a0b4;width:22px;height:22px;animation-duration:16s;animation-delay:5s;"></div>
+
+  <div class="hero-content">
+
+    <!-- MAIN PHOTO ✏️ Replace src="" with your photo e.g. src="mom.jpg" -->
+    <div class="hero-photo-frame">
+      <img src="IMG20260414194328.jpg" alt="Mom">
+      <div class="photo-placeholder">
+        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Add your photo here</span>
+      </div>
+    </div>
+
+    <p class="occasion-tag">Happy Mother's Day</p>
+
+    <!-- TITLE ✏️ Change "Mom" to her name or nickname -->
+    <h1 class="hero-title">To the most<br><em>wonderful Mom</em></h1>
+
+    <!-- OPENING LINE ✏️ Write your opening words -->
+    <p class="hero-subtitle">Thank you for every hug, every lesson, and every moment of love you've given us.</p>
+
+    <p class="scroll-hint">↓ &nbsp; scroll to celebrate &nbsp; ↓</p>
+  </div>
+</section>
+
+<div class="divider">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+<!-- ═══════════════════════════════════
+     PERSONAL MESSAGE
+═══════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">A note from the heart</p>
+
+  <!-- SECTION TITLE ✏️ -->
+  <h2 class="section-title">You are our whole world.</h2>
+
+  <!-- YOUR MESSAGE ✏️ Write your personal message here -->
+  <p class="section-body">
+    There are no words big enough to describe what you mean to us.
+    You have loved us without conditions, guided us without judgment,
+    and made our lives richer just by being in them. On this special day,
+    we want you to know — you are the greatest gift we've ever had.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════
+     PHOTO GRID
+═══════════════════════════════════ -->
+<div class="section" style="padding-top:0">
+  <p class="section-label">Our favourite moments</p>
+  <h2 class="section-title">A life full of memories</h2>
+
+  <div class="photo-grid">
+
+    <!-- PHOTO 1 ✏️ src="yourfile.jpg" and edit caption -->
+    <div class="photo-card">
+      <img src="IMG20260509165749.jpg" alt="Memory 1">
+      <div class="ph">📷 Photo 1</div>
+    </div>
+
+    <!-- PHOTO 2 ✏️ -->
+    <div class="photo-card">
+      <img src="IMG20260509140103_01.jpg" alt="Memory 2">
+      <div class="ph">📷 Photo 2</div>
+    </div>
+
+    <!-- PHOTO 3 ✏️ -->
+    <div class="photo-card">
+      <img src="IMG20260425172110.jpg" alt="Memory 3">
+      <div class="ph">📷 Photo 3</div>
+    </div>
+
+        <!-- PHOTO 4 ✏️ -->
+    <div class="photo-card">
+      <img src="DSC_3274.JPG" alt="Memory 3">
+      <div class="ph">📷 Photo 3</div>
+    </div>
+
+        <!-- PHOTO 5 ✏️ -->
+    <div class="photo-card">
+      <img src="IMG20251102152347.jpg" alt="Memory 3">
+      <div class="ph">📷 Photo 3</div>
+    </div>
+
+        <!-- PHOTO 6 ✏️ -->
+    <div class="photo-card">
+      <img src="IMG20251101165203.jpg" alt="Memory 3">
+      <div class="ph">📷 Photo 3</div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════
+     QUOTE
+═══════════════════════════════════ -->
+<div class="section" style="padding-top:0; padding-bottom:20px">
+  <div class="quote-block">
+    <!-- QUOTE ✏️ -->
+    <p class="quote-text">"A mother is she who can take the place of all others, but whose place no one else can take."</p>
+    <!-- ATTRIBUTION ✏️ -->
+    <p class="quote-attr">— Cardinal Mermillod</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     WIDE BANNER PHOTO
+═══════════════════════════════════ -->
+<!-- BANNER PHOTO ✏️ src="wide-photo.jpg" -->
+<div class="banner-photo">
+  <img src="IMG20251214184149.jpg" alt="Banner">
+  <div class="ph">
+    <svg width="60" height="100" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+    <span>Wide landscape banner photo here</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     REASONS WE LOVE YOU
+═══════════════════════════════════ -->
+<div class="section">
+  <p class="section-label">Why we love you</p>
+  <h2 class="section-title">Reasons we are grateful</h2>
+  <div class="memories">
+
+    <!-- REASON 1 ✏️ Edit title and description -->
+    <div class="memory-item">
+      <div class="memory-num">1</div>
+      <div class="memory-text">
+        <strong>Your patience is endless</strong>
+        <span>No matter how chaotic things got, you stayed calm and kind. That meant everything.</span>
+      </div>
+    </div>
+
+    <!-- REASON 2 ✏️ -->
+    <div class="memory-item">
+      <div class="memory-num">2</div>
+      <div class="memory-text">
+        <strong>Your cooking feels like home</strong>
+        <span>There's nothing in the world that feels as warm as your food on a cold evening.</span>
+      </div>
+    </div>
+
+    <!-- REASON 3 ✏️ -->
+    <div class="memory-item">
+      <div class="memory-num">3</div>
+      <div class="memory-text">
+        <strong>You always believed in us</strong>
+        <span>When we doubted ourselves, your faith in us gave us the strength to try again.</span>
+      </div>
+    </div>
+
+    <!-- REASON 4 ✏️ -->
+    <div class="memory-item">
+      <div class="memory-num">4</div>
+      <div class="memory-text">
+        <strong>You made every day magical</strong>
+        <span>You turned ordinary days into memories we'll carry forever.</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer>
+  <!-- CLOSING MESSAGE ✏️ -->
+  <p class="footer-title">"We love you more than words can say."</p>
+  <!-- YOUR NAMES ✏️ -->
+  <p>With love — Your Aarush ♡</p>
+</footer>
+
+<script>
+  // Show placeholder for images with no src
+  document.querySelectorAll('.photo-card img, .hero-photo-frame img, .banner-photo img').forEach(img => {
+    if (!img.getAttribute('src')) {
+      img.style.display = 'none';
+    } else {
+      img.nextElementSibling && (img.nextElementSibling.style.display = 'none');
+    }
+  });
+</script>
+</body>
+</html>
